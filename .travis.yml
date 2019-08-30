@@ -19,7 +19,6 @@ env:
     - SPRING_JPA_SHOW_SQL=false
     - JHI_DISABLE_WEBPACK_LOGS=true
     - NG_CLI_ANALYTICS="false"
-    - secure: WY7V8q9RD5t7Gjn5c777MQba8us3D8lnDyQvohE98NTmKNDCUyW7I8Hrnk/74HDMKrCiCchdHXEMqUXGnuqTAELrX1MZNx4HKCyO0Ylsv9rpSumoYsKoEuTRkD4hGoEgItTR4k6CaIOMINn7efZPHvyGqtgLm14iogRtMtsiRXuGi7ySBQL3EmQaXJUgMUMt83mcKFj8pRmoi+wXnCqL7ofwgTCObcuFNWJNSLZA8oBLGcGj9iQoTRgfAjymbX1uDlYV/RT4RYjbaHZB8CWhsnS4wglcNDDCStBwdroO31jFxMBOhcbsJVcajNaYPtFZfUWW7Cc0OdnpJLI38UbkENrHSFk6Hh92KWxLvZ84REYJ8+depxBYm6TURQrWnUIR56U65v/pEhmmxH/AyazNNqNVJZD1wFjlavJ4VPIFQmvNVXWOPfj7SLRcTgeUoz6wGDUSrYnTTmLIGW6fMRlDAxILJleljOGrYYQEk+IGl4mjWJp40cPdbbt6RY2LwLvQP95SROs/q3X5sMvdmme65vph36sWx45Ka5g717Q26HP1B/d3rGVm5ufB1Q8nC628Bigylccfdk4z1P58FWYEDZflKfu5uujSA7rRslc4BpraMpewtpIZv4D7q8ywCoTgyvG8ytq6J4a+x9roS9vb7/S1e+viJKuIgySj7UbSC8I=
 before_install:
   - jdk_switcher use oraclejdk8
   - java -version
@@ -36,10 +35,14 @@ script:
   - './gradlew clean test integrationTest'
   - './gradlew npm_run_test-ci -PnodeInstall --no-daemon'
   - './gradlew bootJar -Pprod -x test'
-  #- './gradlew deployHeroku'
-  - jhipster heroku
+  - './gradlew deployHeroku'
 notifications:
   webhooks:
     on_success: change
     on_failure: always
     on_start: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: WsXd6wbRIsZrrP0deOUwx8wcViv7ondxrSNra0nxmPG5ztXUhkgO5Jr+BKOtzWjh5/RA4k56lmhSlDEsPjgaDaWKZYSq7In1x4S8skb+Q/BXRl7Qs7b0S4sacLpYDMiqsfT29ZfbnbwXxBMtfEhWK+mnly+gPCUSUxhp3VzU6uNiVJ9+N8hyJR1GjSfTA78xngRJAvCQh4n6yCFZo/jWMrsQYI5h/S8ZgcNOl9awitPxVpO3hiu2zs8gj2zZkufAX7lXI+/PDq/E9WWqyT+oGkC/AYdxBBjYQV86pqlCWxoWoE0eI1jvhtStLMQi8gmrBUwhgtnmYew5OkAXUC2VK9sPEQVSNgVWSTvaH7LG9Um8JpBAgH42Onz9e/tCxeUysa9Q1VfILAyg88r3369DifEQHKhfSKgRteW6d/960SjamOZ8eb/3XK5wl9zOW2gwcW+TdESTscBDEoyvmdoBmIpnNiHc0cbDLbD9RdR24AQ7VJ8oBHsIMTMHDr/78460wTRIQwjBMZqWVEY2wogphukx8kicRopVzPHPcSQT2wqvBul5d/MBt4jf1vC0E6ib/ig5/AFPPKJx3fwFGGOaI1mPtAjHvxp1OQ/1IgSMUHm6Bo/J5cMKNCchEtxYMg38zdlJFXQl9RENn3u5CarBJiFjOjYd+DAGW035WfKn0rE=
+  app: salatracker
