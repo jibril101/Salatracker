@@ -36,7 +36,8 @@ script:
   - './gradlew clean test integrationTest'
   - './gradlew npm_run_test-ci -PnodeInstall --no-daemon'
   - './gradlew bootJar -Pprod -x test'
-  - './gradlew deployHeroku'
+  #- './gradlew deployHeroku'
+  - jhipster heroku
 notifications:
   webhooks:
     on_success: change
