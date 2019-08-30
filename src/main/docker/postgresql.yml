@@ -1,0 +1,11 @@
+version: '2'
+services:
+  salatracker-postgresql:
+    image: postgres:11.4
+    # volumes:
+    #     - ~/volumes/jhipster/Salatracker/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=Salatracker
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
